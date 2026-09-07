@@ -29,4 +29,7 @@ echo "<br>";
 echo str_word_count($the_string);
 echo "<br>";
 echo strrev($the_string);
+echo "<br>";
+$programming="Programming is not cool";
+echo str_replace("not","very",$programming);
 ?>
