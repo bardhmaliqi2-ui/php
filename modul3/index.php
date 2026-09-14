@@ -71,4 +71,53 @@ case($age>20):
 
 default:echo "You are old";
 }
+
+//Loops
+//1.While loop
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+
+$x=1;
+while($x<=5){
+    echo "The number is: $x <br>";
+    $x++;
+}
+
+//2.Do while loop
+echo "<br>";
+echo "<br>";
+
+$y=2;
+do{
+    echo "The number is:$y <br>";
+    $y++;
+}while($y<=8);
+
+//3.For loop
+echo "<br>";
+echo "<br>";
+for($z=9; $z<=16; $z++){
+    echo "Number is:$z <br>";
+}
+
+//4.Foreach loop
+echo "<br>";
+echo "<br>";
+echo "<br>";
+
+$cars= array("BMW","Audi","Lamborghini","Pagani","Volkswagen");
+foreach($cars as $value){
+    echo "$value <br>";
+}
+echo "<br>";
+echo "<br>";
+echo "<br>";
+
+  
+$age = array("Anthony" => 24, "Michael" => 63, "Steph" => 38);
+ foreach($age as $key => $value){
+    echo "$key = $value  <br>";
+ }
 ?>
