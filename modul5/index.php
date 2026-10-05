@@ -24,4 +24,16 @@ for($i=0;$i<5;$i++){
     }
     echo "<br>";
 }
+
+//Associative arrays
+
+$grades = array("Math"=>"3","Art"=>"5","History"=>"4","Music"=>"4");
+echo "Art grade is:" . $grades["Art"];
+echo "<br>";
+echo "<br>";
+
+foreach($grades as $subject=>$grade){
+    echo "Subject: ".$subject.", Grade: ".$grade;
+    echo "<br>";
+}
 ?>
