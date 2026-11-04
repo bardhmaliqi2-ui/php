@@ -12,7 +12,7 @@
 		$email = $_POST['email'];
 
 
-			$sql = "INSERT INTO users1(username,name,surname,password,email) VALUES (:username, :name, :surname, :password, :email)";
+			$sql = "INSERT INTO users2(username,name,surname,password,email) VALUES (:username, :name, :surname, :password, :email)";
 
 			$insertSql = $conn->prepare($sql);
 
