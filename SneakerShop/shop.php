@@ -1,6 +1,6 @@
 <?php
 include_once "config.php";
-include_once "includes/functions.php";
+include_once "functions.php";
 
 $search = $_GET['search'] ?? '';
 
@@ -364,9 +364,6 @@ $products = $stmt->fetchAll();
     </div>
 
 </nav>
-
-
-<!-- PAGE TITLE -->
 
 <section class="page-title">
 

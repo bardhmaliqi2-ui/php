@@ -1,6 +1,5 @@
 <?php
 include_once "config.php";
-include_once "includes/functions.php";
 
 if (isLoggedIn()) {
     if (isAdmin()) {
@@ -382,5 +381,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
 </script>
+<?php include 'footer.php'; ?>
 </body>
 </html>
