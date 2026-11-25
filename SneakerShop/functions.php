@@ -1,6 +1,23 @@
 <?php
 include_once 'config.php';
-
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+function requireLogin() {
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: login.php");
+        exit;
+    }
+}
+function getUserId() {
+    return $_SESSION['user_id'] ?? null;
+}
+function e($value) {
+    return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
+}
+function formatPrice($price) {
+    return number_format((float)$price, 2) . " €";
+}
 function addCategory($category_name) {
     global $conn;
 
@@ -66,7 +83,11 @@ function deleteProduct($id) {
 
     return mysqli_stmt_execute($stmt);
 }
-function e($value) {
-    return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
+function isLoggedIn() {
+    return isset($_SESSION['user_id']);
+}
+function isAdmin() {
+    return isset($_SESSION['role']) &&
+           $_SESSION['role'] === 'admin';
 }
 ?>

@@ -159,6 +159,9 @@ include_once "functions.php";
             <a href="shop.php">Shop</a>
             <a href="cart.php">Cart</a>
             <a href="login.php">Login</a>
+            <a href="products.php">Products</a>
+            <a href="categories.php">Categories</a>
+            <a href="contact.php">Contact</a>
         </div>
     </nav>
 

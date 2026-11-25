@@ -133,16 +133,19 @@ include "header.php";
                 <tr>
                     <td><?php echo e($product['id']); ?></td>
 
-                    <td>
+                <td>
                         <?php if (!empty($product['image'])): ?>
-                            <img
-                                src="<?php echo e($product['image']); ?>"
-                                alt="<?php echo e($product['name']); ?>"
-                            >
-                        <?php else: ?>
-                            No photo
-                        <?php endif; ?>
-                    </td>
+                    <img
+                        src="<?php echo htmlspecialchars($product['image']); ?>"
+                        alt="<?php echo htmlspecialchars($product['name']); ?>"
+                        style="width:85px; height:85px; object-fit:contain;"
+                        onerror="this.src='https://placehold.co/100x100?text=No+Image';"
+                    >
+
+                    <?php else: ?>
+                      No photo
+                    <?php endif; ?>
+                </td>
 
                     <td><?php echo e($product['name']); ?></td>
 

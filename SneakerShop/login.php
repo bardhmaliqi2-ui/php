@@ -1,7 +1,7 @@
 <?php
 include_once "config.php";
 
-if (isLoggedIn()) {
+if (isLoggedIn()) { 
     if (isAdmin()) {
         header("Location: admin/dashboard.php");
     } else {

@@ -361,6 +361,9 @@ $products = $stmt->fetchAll();
         <a href="shop.php">Shop</a>
         <a href="cart.php">Cart</a>
         <a href="login.php">Login</a>
+        <a href="products.php">Products</a>
+        <a href="categories.php">Categories</a>
+        <a href="contact.php">Contact</a>
     </div>
 
 </nav>
@@ -449,28 +452,39 @@ $products = $stmt->fetchAll();
 
                 <?php foreach ($products as $product): ?>
 
-                    <div class="product-card">
+                <div class="product-card">
 
-                        <div class="product-image">
+                    <div class="product-image">
 
-                            <?php if (!empty($product['image'])): ?>
+                        <?php if (!empty($product['image'])): ?>
 
-                                <img
-                                    src="uploads/products/<?= rawurlencode(basename($product['image'])) ?>"
-                                    alt="<?= e($product['name']) ?>"
-                                >
+                            <?php
+                                $image = $product['image'] ?? '';
+                                $image = str_replace('\\', '/', $image);
+                                $image = ltrim($image, '/');
+                                $imageURL = '/php1/SneakerShop/' . $image;
+                            ?>
+                            <?php
+                                $imagePath = __DIR__ . '/' . $product['image'];
+                                echo "<p>Path: " . htmlspecialchars($imagePath) . "</p>";
+                                echo "<p>Exists: " . (file_exists($imagePath) ? 'YES' : 'NO') . "</p>";
+                            ?>
 
+                            <img
+                                src="<?php echo htmlspecialchars($imageURL); ?>"
+                                alt="<?php echo htmlspecialchars($product['name']); ?>"
+                                style="width:100%; height:220px; object-fit:contain;"
+                                onerror="this.src='https://placehold.co/400x300?text=Image+Not+Found';"
+                            >
                             <?php else: ?>
-
                                 <img
-                                    src="https://placehold.co/400x300?text=Sneaker"
-                                    alt="No product image"
-                                >
-
+                                src="https://placehold.co/400x300?text=Sneaker"
+                                alt="No product image"
+                            ?>
                             <?php endif; ?>
-
-                        </div>
-
+                    </div>
+                </div>
+                                    
 
                         <div class="product-info">
 

@@ -1,39 +1,47 @@
-
 <?php
-include_once '/config.php';
+session_start();
 
-if (isset($_GET['id'])) {
+require_once __DIR__ . '/config.php';
 
-    $id = intval($_GET['id']);
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
-    if ($id > 0) {
+if (!$id || $id <= 0) {
+    header("Location: products.php");
+    exit;
+}
 
-        $sql = "DELETE FROM products WHERE id = ?";
-        $stmt = mysqli_prepare($conn, $sql);
+try {
+    $stmt = $conn->prepare(
+        "SELECT image FROM products WHERE id = ?"
+    );
 
-        mysqli_stmt_bind_param($stmt, "i", $id);
+    $stmt->execute([$id]);
 
-        if (mysqli_stmt_execute($stmt)) {
+    $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if (mysqli_stmt_affected_rows($stmt) > 0) {
-                header("Location: products.php?message=deleted");
-                exit;
-            } else {
-                echo "Product not found.";
-            }
-
-        } else {
-            echo "Error deleting product: " .
-                 htmlspecialchars(mysqli_error($conn));
-        }
-
-        mysqli_stmt_close($stmt);
-
-    } else {
-        echo "Invalid product ID.";
+    if (!$product) {
+        header("Location: products.php");
+        exit;
     }
+    $deleteStmt = $conn->prepare(
+        "DELETE FROM products WHERE id = ?"
+    );
 
-} else {
-    echo "No product ID provided.";
+    $deleteStmt->execute([$id]);
+
+    if (!empty($product['image'])) {
+
+        $imagePath = __DIR__ . '/' . $product['image'];
+
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+    }
+    header("Location: products.php?deleted=1");
+    exit;
+
+} catch (PDOException $e) {
+
+    die("Database error: " . $e->getMessage());
 }
 ?>
